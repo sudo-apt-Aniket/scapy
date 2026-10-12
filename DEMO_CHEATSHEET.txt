@@ -1,0 +1,77 @@
+SCAPY CLASSROOM CHEAT SHEET
+===========================
+
+ONLY MEMORIZE THESE IDEAS:
+
+show()       -> inspect
+/            -> stack layers
+sr1()        -> send + receive
+sniff()      -> capture
+nsummary()   -> summarize
+hexdump()    -> raw bytes
+wrpcap()     -> save PCAP
+rdpcap()     -> read PCAP
+
+CORE COMMANDS
+-------------
+
+Build:
+    packet = IP(dst="8.8.8.8") / ICMP()
+
+Inspect:
+    packet.show()
+
+Stack:
+    Ether() / IP(dst="8.8.8.8") / ICMP()
+
+Send + receive:
+    response = sr1(IP(dst="8.8.8.8") / ICMP(), timeout=3)
+
+Sniff:
+    packets = sniff(filter="icmp", count=5)
+
+Summarize:
+    packets.nsummary()
+
+Hex:
+    hexdump(packet)
+
+Save:
+    wrpcap("capture.pcap", packets)
+
+Read:
+    packets = rdpcap("capture.pcap")
+
+Wireshark filters:
+    icmp
+    tcp
+    udp
+    dns
+    arp
+
+SCAPY SHELL VS COMMAND PROMPT
+-----------------------------
+
+If you see:
+    >>>
+
+You are INSIDE Scapy.
+
+Use Python/Scapy commands there:
+    IP().show()
+    sniff()
+    exit()
+
+Do NOT type:
+    python scapy_demo.py
+    cd
+    pwd
+    clear
+
+Those belong in Command Prompt / PowerShell.
+
+To leave Scapy:
+    exit()
+
+Then at C:\...> you can run:
+    python 01_basic_layers.py
